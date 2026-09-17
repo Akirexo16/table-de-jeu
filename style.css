@@ -380,158 +380,177 @@ main {
   }
 }
 
-/* ---------- Table de Blackjack ---------- */
+/* ---------- Table de Blackjack (style table verte plate) ---------- */
 
-.table-jeu {
+:root {
+  --bj-vert-clair: #3ab35c;
+  --bj-vert: #2e9a4c;
+  --bj-vert-sombre: #1f7038;
+  --bj-noir-transp: rgba(10, 25, 15, 0.32);
+  --bj-noir-transp-fort: rgba(6, 16, 10, 0.55);
+  --bj-carte-rouge: #d1342a;
+}
+
+.bj-page {
   width: 100%;
-  max-width: 900px;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
-.bandeau-solde {
+.bj-barre-info {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
   align-items: center;
   justify-content: space-between;
-  padding: 0.9rem 1.4rem;
-  background: rgba(8, 41, 33, 0.6);
-  border: 1px solid rgba(201, 162, 39, 0.25);
-  border-radius: 8px;
-  font-size: 0.95rem;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--bj-noir-transp);
+  color: #fff;
+  font-size: 0.85rem;
 }
 
-.bandeau-solde .solde {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  color: var(--gold-bright);
+.bj-barre-info .bj-info-libelle {
+  opacity: 0.75;
+  margin-right: 0.3rem;
 }
 
-.zone-mise {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.zone-mise input {
-  width: 90px;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid rgba(201, 162, 39, 0.4);
-  background: rgba(242, 235, 221, 0.08);
-  color: var(--cream);
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-}
-
-.zone-mise input:focus {
-  outline: 2px solid var(--gold-bright);
-  outline-offset: 1px;
-}
-
-.jetons-rapides {
-  display: flex;
-  gap: 0.4rem;
-}
-
-.jeton {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2px dashed rgba(242, 235, 221, 0.5);
-  background: radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold) 70%);
-  color: var(--ink);
-  font-size: 0.7rem;
+.bj-barre-info strong {
   font-weight: 700;
-  display: flex;
+}
+
+.bj-icone {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.95rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.12s ease;
+  transition: background 0.15s ease;
 }
 
-.jeton:hover {
-  transform: scale(1.08);
+.bj-icone:hover {
+  background: rgba(255, 255, 255, 0.22);
 }
 
-.plateau {
+.bj-table {
   position: relative;
-  border-radius: 16px;
-  border: 1px solid rgba(201, 162, 39, 0.3);
-  background: radial-gradient(ellipse at 50% 0%, var(--felt-line) 0%, var(--felt-dark) 60%, var(--felt-darker) 100%);
-  padding: clamp(1.5rem, 4vw, 2.75rem);
-  min-height: 420px;
+  flex: 1;
+  min-height: 480px;
+  background:
+    radial-gradient(ellipse at 50% 38%, var(--bj-vert-clair) 0%, var(--bj-vert) 55%, var(--bj-vert-sombre) 100%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.5rem;
-  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.35);
+  padding: 1.5rem 1.25rem 1.75rem;
+  overflow: hidden;
 }
 
-.zone-main {
+.bj-filigrane {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: rgba(255, 255, 255, 0.16);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bj-filigrane .bj-filigrane-symbole {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.bj-zone {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  min-height: 108px;
+  justify-content: center;
 }
 
-.etiquette-main {
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
+.bj-zone-joueur {
+  justify-content: flex-end;
+}
+
+.bj-badge-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--ink);
   font-family: var(--font-display);
-  font-size: 1rem;
-  color: var(--cream-dim);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
-.etiquette-main .score {
-  color: var(--gold-bright);
-  font-size: 1.1rem;
+.bj-badge-score .bj-fleche {
+  font-size: 0.7rem;
+  opacity: 0.55;
 }
 
 .cartes {
   display: flex;
-  gap: 0.6rem;
-  min-height: 108px;
+  gap: 0.5rem;
+  min-height: 92px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .carte {
-  width: 72px;
-  height: 100px;
-  border-radius: 8px;
-  background: var(--cream);
+  width: 62px;
+  height: 88px;
+  border-radius: 7px;
+  background: #fdfdfb;
   color: var(--ink);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0.4rem 0.5rem;
+  padding: 0.32rem 0.42rem;
   font-family: var(--font-display);
-  font-weight: 600;
-  box-shadow: 0 4px 10px var(--shadow);
+  font-weight: 700;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
   animation: distribuer 0.28s ease-out;
   flex-shrink: 0;
 }
 
 .carte.rouge {
-  color: var(--red-suit);
+  color: var(--bj-carte-rouge);
 }
 
 .carte .rang-haut {
-  font-size: 1rem;
+  font-size: 0.85rem;
   align-self: flex-start;
 }
 
 .carte .symbole-centre {
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   align-self: center;
 }
 
 .carte .rang-bas {
-  font-size: 1rem;
+  font-size: 0.85rem;
   align-self: flex-end;
   transform: rotate(180deg);
 }
@@ -539,12 +558,12 @@ main {
 .carte.face-cachee {
   background: repeating-linear-gradient(
     135deg,
-    var(--felt-line),
-    var(--felt-line) 6px,
-    var(--felt-dark) 6px,
-    var(--felt-dark) 12px
+    var(--bj-vert-sombre),
+    var(--bj-vert-sombre) 5px,
+    var(--bj-vert) 5px,
+    var(--bj-vert) 10px
   );
-  border: 2px solid var(--gold);
+  border: 2px solid rgba(255, 255, 255, 0.7);
 }
 
 @keyframes distribuer {
@@ -558,52 +577,158 @@ main {
   }
 }
 
-.message-table {
-  text-align: center;
-  min-height: 1.6rem;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  color: var(--gold-bright);
-}
-
-.commandes {
+.bj-centre {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 64px;
   justify-content: center;
 }
 
-.bouton {
+.message-table {
+  text-align: center;
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.65rem 1.4rem;
-  border-radius: 7px;
-  border: 1px solid rgba(201, 162, 39, 0.5);
-  background: transparent;
-  color: var(--cream);
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.bouton:hover:not(:disabled) {
-  background: var(--gold);
+.bj-emplacement-mise {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bj-cercle-mise {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bj-jeton-pose {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold) 70%);
+  border: 2px dashed rgba(255, 255, 255, 0.7);
   color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.68rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 }
 
-.bouton:disabled {
+/* Choix de jetons avant la distribution */
+
+.bj-choix-jetons {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.bj-jeton-choix {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold) 70%);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.72rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.12s ease;
+}
+
+.bj-jeton-choix:hover {
+  transform: translateY(-3px);
+}
+
+.bj-jeton-choix.actif {
+  border-color: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+}
+
+.bj-barre-bas {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--bj-noir-transp-fort);
+  border-radius: 18px 18px 0 0;
+  margin: 0 -1.25rem -1.75rem;
+  margin-top: 0.5rem;
+}
+
+.bj-limites {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+}
+
+.bj-commandes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.pilule {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.55rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease, transform 0.1s ease;
+}
+
+.pilule:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.pilule:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.pilule:disabled {
   opacity: 0.35;
   cursor: not-allowed;
 }
 
-.bouton.principal {
-  background: var(--gold);
-  color: var(--ink);
-  border-color: var(--gold);
+.pilule-primaire {
+  background: #35bf5c;
+  border-color: #35bf5c;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(53, 191, 92, 0.45);
 }
 
-.bouton.principal:hover:not(:disabled) {
-  background: var(--gold-bright);
+.pilule-primaire:hover:not(:disabled) {
+  background: #3fd069;
 }
 
 /* ---------- Page "bientôt" ---------- */
@@ -646,12 +771,5 @@ input:focus-visible {
 @media (max-width: 520px) {
   .site-nav {
     gap: 1rem;
-  }
-  .carte {
-    width: 60px;
-    height: 84px;
-  }
-  .carte .symbole-centre {
-    font-size: 1.3rem;
   }
 }
