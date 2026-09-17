@@ -26,27 +26,65 @@
 </header>
 
 <main>
-  <section class="hero">
-    <h1>Une table, deux jeux, zéro risque</h1>
-    <p>
-      Blackjack et poker en <span class="jetons">jetons virtuels</span>.
-      Aucun argent réel n'est en jeu, jamais — c'est juste pour le plaisir de jouer.
-    </p>
+  <section class="hero-grid">
+    <div class="hero-texte">
+      <h1>Une table, deux jeux, zéro risque</h1>
+      <p>
+        Blackjack et poker en <span class="jetons">jetons virtuels</span>.
+        Aucun argent réel n'est en jeu, jamais — c'est juste pour le plaisir de jouer.
+      </p>
+    </div>
+
+    <div class="hero-eventail" aria-hidden="true">
+      <div class="eventail-pivot eventail-pivot-1">
+        <div class="carte-eventail">
+          <span class="rang-haut">A</span>
+          <span class="symbole-centre">♠</span>
+          <span class="rang-bas">A</span>
+        </div>
+      </div>
+      <div class="eventail-pivot eventail-pivot-2">
+        <div class="carte-eventail rouge">
+          <span class="rang-haut">K</span>
+          <span class="symbole-centre">♥</span>
+          <span class="rang-bas">K</span>
+        </div>
+      </div>
+      <div class="eventail-pivot eventail-pivot-3">
+        <div class="carte-eventail rouge">
+          <span class="rang-haut">Q</span>
+          <span class="symbole-centre">♦</span>
+          <span class="rang-bas">Q</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="grille-jeux">
-    <a href="blackjack.html" class="carte-jeu">
-      <span class="symbole">🂡</span>
-      <h2>Blackjack</h2>
-      <p>Affrontez le croupier. Approchez-vous de 21 sans le dépasser, misez vos jetons et tentez le blackjack naturel.</p>
-      <span class="statut">Jouer maintenant →</span>
+    <a href="blackjack.html" class="jeu-item">
+      <div class="face-carte">
+        <span class="index">J<br />♣</span>
+        <span class="symbole-geant">♣</span>
+        <span class="index index-bas">J<br />♣</span>
+      </div>
+      <div class="legende">
+        <h2>Blackjack</h2>
+        <p>Affrontez le croupier, approchez-vous de 21 et tentez le blackjack naturel.</p>
+        <span class="statut">Jouer maintenant</span>
+      </div>
     </a>
 
-    <a href="poker.html" class="carte-jeu desactivee">
-      <span class="symbole">♦</span>
-      <h2>Poker</h2>
-      <p>Texas Hold'em contre des bots, avec mises et relances. En cours de préparation.</p>
-      <span class="statut">Bientôt disponible</span>
+    <a href="poker.html" class="jeu-item desactivee">
+      <div class="face-carte rouge">
+        <span class="index">Q<br />♦</span>
+        <span class="symbole-geant">♦</span>
+        <span class="index index-bas">Q<br />♦</span>
+      </div>
+      <div class="legende">
+        <h2>Poker</h2>
+        <p>Texas Hold'em contre des bots, avec mises et relances.</p>
+        <span class="statut">Bientôt disponible</span>
+      </div>
     </a>
   </section>
 </main>

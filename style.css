@@ -1,0 +1,657 @@
+/* =========================================================
+   Table de Jeu — feuille de style commune
+   Palette : feutre vert profond + or, cartes crème
+   ========================================================= */
+
+:root {
+  --felt-dark: #0b3d2e;
+  --felt-darker: #082921;
+  --felt-line: #145c44;
+  --cream: #f2ebdd;
+  --cream-dim: #d8cfb8;
+  --gold: #c9a227;
+  --gold-bright: #e0bc4a;
+  --ink: #14241d;
+  --red-suit: #b23a2e;
+  --shadow: rgba(0, 0, 0, 0.45);
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Work Sans", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--cream);
+  background:
+    radial-gradient(circle at 50% -10%, var(--felt-line) 0%, var(--felt-dark) 45%, var(--felt-darker) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Texture feutre très subtile */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+  z-index: 0;
+}
+
+/* Vignettage doux, comme un projecteur au-dessus de la table */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 20%, transparent 45%, rgba(0, 0, 0, 0.4) 100%);
+  z-index: 0;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- En-tête ---------- */
+
+.site-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem clamp(1.25rem, 5vw, 3rem);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  text-decoration: none;
+  font-family: var(--font-display);
+}
+
+.brand .brand-mark {
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.brand .brand-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.75rem;
+  font-size: 0.95rem;
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--cream-dim);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--gold-bright);
+  border-color: var(--gold-bright);
+}
+
+/* ---------- Corps de page ---------- */
+
+main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(2rem, 6vw, 4rem) 1.5rem 4rem;
+  width: 100%;
+}
+
+.pied {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  padding: 1.5rem;
+  opacity: 0.7;
+}
+
+/* ---------- Page d'accueil ---------- */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  max-width: 980px;
+  width: 100%;
+  margin-bottom: clamp(3rem, 7vw, 4.5rem);
+  text-align: left;
+}
+
+.hero-texte h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.3rem, 5vw, 3.4rem);
+  line-height: 1.08;
+  margin: 0 0 1.1rem;
+  color: var(--cream);
+}
+
+.hero-texte p {
+  font-size: 1.05rem;
+  color: var(--cream-dim);
+  line-height: 1.65;
+  max-width: 46ch;
+  margin: 0;
+}
+
+.jetons {
+  color: var(--gold-bright);
+}
+
+/* Éventail de cartes du héros */
+.hero-eventail {
+  position: relative;
+  height: 210px;
+}
+
+.eventail-pivot {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-origin: bottom center;
+}
+
+.eventail-pivot-1 {
+  transform: translateX(-155px) rotate(-16deg);
+}
+
+.eventail-pivot-2 {
+  transform: translateX(-65px) rotate(-2deg);
+  z-index: 2;
+}
+
+.eventail-pivot-3 {
+  transform: translateX(25px) rotate(13deg);
+}
+
+.carte-eventail {
+  width: 132px;
+  height: 184px;
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-weight: 600;
+  box-shadow: 0 16px 30px var(--shadow);
+  animation: apparition-carte 0.6s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+
+.eventail-pivot-1 .carte-eventail {
+  animation-delay: 0s;
+}
+.eventail-pivot-2 .carte-eventail {
+  animation-delay: 0.09s;
+}
+.eventail-pivot-3 .carte-eventail {
+  animation-delay: 0.18s;
+}
+
+.carte-eventail.rouge {
+  color: var(--red-suit);
+}
+
+.carte-eventail .rang-haut {
+  font-size: 1.3rem;
+  align-self: flex-start;
+}
+
+.carte-eventail .symbole-centre {
+  font-size: 2.6rem;
+  align-self: center;
+}
+
+.carte-eventail .rang-bas {
+  font-size: 1.3rem;
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+
+@keyframes apparition-carte {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carte-eventail {
+    animation: none;
+  }
+}
+
+/* Cartes à jouer cliquables vers chaque jeu */
+
+.grille-jeux {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  width: 100%;
+}
+
+.jeu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  width: 190px;
+}
+
+.jeu-item .face-carte {
+  position: relative;
+  width: 190px;
+  height: 266px;
+  border-radius: 16px;
+  background: var(--cream);
+  color: var(--ink);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-weight: 600;
+  box-shadow: 0 14px 26px var(--shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.jeu-item:not(.desactivee):hover .face-carte {
+  transform: translateY(-6px) rotate(-1.2deg);
+  box-shadow: 0 22px 34px var(--shadow);
+}
+
+.face-carte.rouge {
+  color: var(--red-suit);
+}
+
+.face-carte .index {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.face-carte .index-bas {
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+
+.face-carte .symbole-geant {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  opacity: 0.9;
+}
+
+.jeu-item .legende {
+  text-align: center;
+  max-width: 210px;
+}
+
+.jeu-item .legende h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0 0 0.35rem;
+  color: var(--cream);
+}
+
+.jeu-item .legende p {
+  margin: 0 0 0.5rem;
+  font-size: 0.88rem;
+  color: var(--cream-dim);
+  line-height: 1.5;
+}
+
+.jeu-item .statut {
+  font-size: 0.78rem;
+  color: var(--gold-bright);
+}
+
+.jeu-item.desactivee {
+  cursor: default;
+}
+
+.jeu-item.desactivee .face-carte {
+  filter: grayscale(0.55);
+  opacity: 0.75;
+}
+
+.jeu-item.desactivee .statut {
+  color: var(--cream-dim);
+}
+
+@media (max-width: 720px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-texte p {
+    margin-inline: auto;
+  }
+  .hero-eventail {
+    height: 190px;
+  }
+}
+
+/* ---------- Table de Blackjack ---------- */
+
+.table-jeu {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.bandeau-solde {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.4rem;
+  background: rgba(8, 41, 33, 0.6);
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.bandeau-solde .solde {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--gold-bright);
+}
+
+.zone-mise {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.zone-mise input {
+  width: 90px;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  background: rgba(242, 235, 221, 0.08);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+
+.zone-mise input:focus {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 1px;
+}
+
+.jetons-rapides {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.jeton {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px dashed rgba(242, 235, 221, 0.5);
+  background: radial-gradient(circle at 35% 30%, var(--gold-bright), var(--gold) 70%);
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.jeton:hover {
+  transform: scale(1.08);
+}
+
+.plateau {
+  position: relative;
+  border-radius: 16px;
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  background: radial-gradient(ellipse at 50% 0%, var(--felt-line) 0%, var(--felt-dark) 60%, var(--felt-darker) 100%);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.35);
+}
+
+.zone-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.etiquette-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--cream-dim);
+}
+
+.etiquette-main .score {
+  color: var(--gold-bright);
+  font-size: 1.1rem;
+}
+
+.cartes {
+  display: flex;
+  gap: 0.6rem;
+  min-height: 108px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.carte {
+  width: 72px;
+  height: 100px;
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.4rem 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  box-shadow: 0 4px 10px var(--shadow);
+  animation: distribuer 0.28s ease-out;
+  flex-shrink: 0;
+}
+
+.carte.rouge {
+  color: var(--red-suit);
+}
+
+.carte .rang-haut {
+  font-size: 1rem;
+  align-self: flex-start;
+}
+
+.carte .symbole-centre {
+  font-size: 1.6rem;
+  align-self: center;
+}
+
+.carte .rang-bas {
+  font-size: 1rem;
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+
+.carte.face-cachee {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--felt-line),
+    var(--felt-line) 6px,
+    var(--felt-dark) 6px,
+    var(--felt-dark) 12px
+  );
+  border: 2px solid var(--gold);
+}
+
+@keyframes distribuer {
+  from {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.message-table {
+  text-align: center;
+  min-height: 1.6rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--gold-bright);
+}
+
+.commandes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.bouton {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: 7px;
+  border: 1px solid rgba(201, 162, 39, 0.5);
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.bouton:hover:not(:disabled) {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.bouton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.bouton.principal {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+}
+
+.bouton.principal:hover:not(:disabled) {
+  background: var(--gold-bright);
+}
+
+/* ---------- Page "bientôt" ---------- */
+
+.bientot {
+  max-width: 520px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bientot .symbole {
+  font-size: 3rem;
+}
+
+.bientot h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin: 0;
+}
+
+.bientot p {
+  color: var(--cream-dim);
+  line-height: 1.6;
+}
+
+/* ---------- Focus clavier visible ---------- */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 520px) {
+  .site-nav {
+    gap: 1rem;
+  }
+  .carte {
+    width: 60px;
+    height: 84px;
+  }
+  .carte .symbole-centre {
+    font-size: 1.3rem;
+  }
+}
